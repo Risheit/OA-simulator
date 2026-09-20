@@ -1,0 +1,137 @@
+# Dependencies
+node_modules/
+venv/
+.venv/
+env/
+.ENV/
+env.bak/
+env-manual-setup.py
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+*.manifest
+*.spec
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# NodeJS
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.tsbuildinfo
+
+# Build output
+*.min.js
+*.min.css
+
+# Unit test / coverage reports
+coverage/
+.nyc_output/
+*.test.js
+*.spec.js
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+.env.test
+
+# Logs
+*.log
+logs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.DS_Store?
+
+# Backup files
+*.bak
+*.backup
+*.save
+*.old
+*.orig
+
+# Archives
+*.zip
+*.rar
+*.tar
+*.gz
+*.7z
+
+# Compiled
+*.o
+*.a
+
+# Setuptools wheel log
+pip-log.txt
+pip-delete-this-directory.txt
+setuptools-log.txt
