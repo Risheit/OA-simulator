@@ -15,5 +15,6 @@ RUN npm run build
 
 EXPOSE 8081
 ENV PORT=8081
+ENV NODE_ENV=production
 
 CMD ["npm", "start"]
