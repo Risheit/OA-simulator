@@ -7,9 +7,11 @@ import {
   readdir,
 } from "node:fs/promises";
 import { dirname, isAbsolute, join, relative, resolve } from "node:path";
-import { ok, Result } from "./errors.js";
+import { ok, Result, ServerIssueError } from "./errors.js";
 import { fail } from "node:assert";
 import { existsSync } from "node:fs";
+import { exec } from "node:child_process";
+import { promisify } from "node:util";
 
 const failFileNotFound = () => fail("File not found");
 const failInvalidAccess = () => fail("Accessing files outside of sandbox");
@@ -120,4 +122,12 @@ export async function lsSandbox(
   }));
 
   return ok(cleanedEntries);
+}
+
+export async function execSandboxCommand(
+  sandboxPath: string,
+  cmd: string,
+): Promise<Record<string, string>> {
+  const execAsync = promisify(exec);
+  return execAsync(cmd, { timeout: 1000, cwd: sandboxPath, env: {} });
 }

@@ -1,4 +1,11 @@
-export const InvalidRequest = "invalid request" as const;
+export const InvalidRequest = "invalid request";
+export const ServerIssue = "internal error";
+
+export class ServerIssueError extends Error {
+  constructor(message: string) {
+    super(message, { cause: ServerIssue });
+  }
+}
 
 export class InvalidRequestError extends Error {
   constructor(message: string) {

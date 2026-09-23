@@ -7,6 +7,7 @@ import express, {
 import { env } from "node:process";
 import { existsSync } from "node:fs";
 import {
+  execSandboxCommand,
   lsSandbox,
   readSandboxFile,
   resetSandbox,
@@ -21,6 +22,7 @@ import {
   InvalidRequestError,
 } from "./errors.js";
 import { contentType } from "mime-types";
+import { exec } from "node:child_process";
 
 assertEnvVariableDefined("PORT", env.PORT); // Server port
 assertEnvVariableDefined("SANDBOX_PATH", env.SANDBOX_PATH); // Absolute file path to sandbox
@@ -106,6 +108,18 @@ app.delete("/sandbox/file/*filepath", async (req, res) => {
   }
 
   res.sendStatus(200);
+});
+
+app.use("/sandbox/cmd", express.json());
+app.post("/sandbox/cmd", async (req, res) => {
+  const cmd = req.body.cmd as string | undefined | null;
+
+  if (!cmd) {
+    throw new InvalidRequestError("Missing or invalid cmd field in body");
+  }
+
+  const result = await execSandboxCommand(config.sandboxPath, cmd);
+  res.status(200).json(result);
 });
 
 // Invalid request handler
