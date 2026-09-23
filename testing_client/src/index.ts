@@ -47,6 +47,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
   if (scheme !== "Bearer" || token != config.secretKey) {
     res.status(401).json({ err: "Invalid authorization" });
+    return;
   }
 
   next();
