@@ -22,17 +22,35 @@ import {
   InvalidRequestError,
 } from "./errors.js";
 import { contentType } from "mime-types";
-import { exec } from "node:child_process";
 
 assertEnvVariableDefined("PORT", env.PORT); // Server port
 assertEnvVariableDefined("SANDBOX_PATH", env.SANDBOX_PATH); // Absolute file path to sandbox
+assertEnvVariableDefined("ACCESS_KEY", env.ACCESS_KEY); // Secure secret key
 
 const app: Express = express();
 
 const config = {
   port: env.PORT!,
   sandboxPath: env.SANDBOX_PATH!,
+  secretKey: env.ACCESS_KEY!,
 };
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
+    res.status(401).json({ err: "Missing authorization" });
+    return;
+  }
+
+  const [scheme, token] = authHeader.split(" ");
+
+  if (scheme !== "Bearer" || token != config.secretKey) {
+    res.status(401).json({ err: "Invalid authorization" });
+  }
+
+  next();
+});
 
 app.get("/health", async (_, res) => {
   if (existsSync(config.sandboxPath)) {
@@ -110,8 +128,7 @@ app.delete("/sandbox/file/*filepath", async (req, res) => {
   res.sendStatus(200);
 });
 
-app.use("/sandbox/cmd", express.json());
-app.post("/sandbox/cmd", async (req, res) => {
+app.post("/sandbox/cmd", express.json(), async (req, res) => {
   const cmd = req.body.cmd as string | undefined | null;
 
   if (!cmd) {
