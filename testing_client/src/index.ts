@@ -35,6 +35,14 @@ const config = {
   secretKey: env.ACCESS_KEY!,
 };
 
+app.get("/health", async (_, res) => {
+  if (existsSync(config.sandboxPath)) {
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(503);
+  }
+});
+
 app.use((req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
 
@@ -51,14 +59,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   }
 
   next();
-});
-
-app.get("/health", async (_, res) => {
-  if (existsSync(config.sandboxPath)) {
-    res.sendStatus(200);
-  } else {
-    res.sendStatus(503);
-  }
 });
 
 app.post("/clean", (_, res) => {

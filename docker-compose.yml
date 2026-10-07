@@ -11,6 +11,12 @@ services:
       - PUID=${PUID:-1000}
       - PGID=${PGID:-1000}
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8443/healthz"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
   testing-client:
     build:
@@ -21,3 +27,17 @@ services:
     environment:
       - ACCESS_KEY=${ACCESS_KEY}
     restart: unless-stopped
+    healthcheck:
+      test: [
+          "CMD",
+          "node",
+          "-e",
+          "const http = require('http');
+          http.get('http://localhost:8081/health', (res) => {
+          process.exit(res.statusCode === 200 ? 0 : 1);
+          }).on('error', () => process.exit(1));",
+        ]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
