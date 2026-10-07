@@ -4,15 +4,17 @@ services:
       context: .
       dockerfile: editor_client/Dockerfile
     ports:
-      - "8443:8443"
+      - "8080:8080"
+    user: 1000:1000
+    tmpfs: # Keep on top so bind mounts override paths.
+      - /home/coder:mode=755,uid=1000,gid=1000
     volumes:
-      - ./editor_client:/config
-    environment:
-      - PUID=${PUID:-1000}
-      - PGID=${PGID:-1000}
+      - ./editor_client/config:/home/coder/.config
+      - ./dist/sandbox:/home/coder/project
+      - ./dist/.local:/home/coder/.local
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8443/healthz"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080/healthz"]
       interval: 15s
       timeout: 10s
       retries: 3

@@ -1,8 +1,5 @@
-FROM linuxserver/code-server:latest
+FROM codercom/code-server:latest
 
-ENV PUID=1000
-ENV PGID=1000 
+EXPOSE 8080
 
-EXPOSE 8443
-
-CMD ["/bin/sh", "-c", "code-server --bind-addr 0.0.0.0:8443"]
+ENTRYPOINT ["code-server", "--bind-addr", "0.0.0.0:8080", "/home/coder/project"]
