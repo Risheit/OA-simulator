@@ -1,23 +1,23 @@
 services:
-  testing-sandbox:
-    
-  code-server:
-    image: lscr.io/linuxserver/code-server:latest
-    container_name: code-server
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
-      - PASSWORD=password #optional
-      - HASHED_PASSWORD= #optional
-      - SUDO_PASSWORD=password #optional
-      - SUDO_PASSWORD_HASH= #optional
-      - PROXY_DOMAIN=code-server.my.domain #optional
-      - DEFAULT_WORKSPACE=/config/workspace #optional
-      - PWA_APPNAME=code-server #optional
-    volumes:
-      - /path/to/code-server/config:/config
+  editor-client:
+    build:
+      context: .
+      dockerfile: editor_client/Dockerfile
     ports:
-      - 8443:8443
+      - "8443:8443"
+    volumes:
+      - ./editor_client:/config
+    environment:
+      - PUID=${PUID:-1000}
+      - PGID=${PGID:-1000}
     restart: unless-stopped
 
+  testing-client:
+    build:
+      context: .
+      dockerfile: testing_client/Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      - ACCESS_KEY=${ACCESS_KEY}
+    restart: unless-stopped
