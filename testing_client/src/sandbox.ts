@@ -7,7 +7,7 @@ import {
   readdir,
 } from "node:fs/promises";
 import { dirname, isAbsolute, join, relative, resolve } from "node:path";
-import { ok, Result, ServerIssueError } from "./errors.js";
+import { ok, Result } from "./errors.js";
 import { fail } from "node:assert";
 import { existsSync } from "node:fs";
 import { exec } from "node:child_process";

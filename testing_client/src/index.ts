@@ -146,12 +146,12 @@ app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
     next(err);
   }
 
-  res.status(400).json({ error: err.message });
+  res.status(400).json({ err: err.message });
 });
 
 // Default error handler
 app.use((err: Error, _: Request, res: Response, __: NextFunction) => {
-  res.status(500).json({ error: err.message });
+  res.status(500).json({ err: err.message });
 });
 
 app.listen(env.PORT);
