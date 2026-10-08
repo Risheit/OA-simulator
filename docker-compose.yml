@@ -10,7 +10,6 @@ services:
       - /home/coder:mode=755,uid=1000,gid=1000
     volumes:
       - ./editor_client/config:/home/coder/.config
-      - ./dist/sandbox:/home/coder/project
       - ./dist/.local:/home/coder/.local
     restart: unless-stopped
     healthcheck:
