@@ -1,8 +1,13 @@
 {
   "name": "oa-simulator",
+  "private": true,
   "workspaces": [
     "libs",
     "testing_client",
     "editor_client"
-  ]
+  ],
+  "allowScripts": {
+    "fsevents": true,
+    "nodemon": true
+  }
 }

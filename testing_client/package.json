@@ -1,5 +1,6 @@
 {
   "name": "@oa-simulator/testing_client",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -26,9 +27,5 @@
     "express": "^5.2.1",
     "mime-types": "^3.0.2",
     "@oa-simulator/libs": "*"
-  },
-  "allowScripts": {
-    "fsevents@1.2.13": true,
-    "nodemon@1.19.4": true
   }
 }
