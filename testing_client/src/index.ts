@@ -21,7 +21,7 @@ import {
   InvalidFilePathError,
   isInvalidFilePath,
   InvalidRequestError,
-} from "./errors.js";
+} from "@oa-simulator/libs";
 import { contentType } from "mime-types";
 
 assertEnvVariableDefined("PORT", env.PORT); // Server port

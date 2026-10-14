@@ -1,12 +1,11 @@
 {
-  "name": "editor_client",
+  "name": "@oa-simulator/editor_client",
   "version": "1.0.0",
   "description": "",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "start": "node dist/index.js"
+    "build": "tsc -p tsconfig.json"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -16,5 +15,7 @@
     "jiti": "^2.7.0",
     "typescript-eslint": "^8.70.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@oa-simulator/libs": "*"
+  }
 }

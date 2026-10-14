@@ -1,9 +1,16 @@
 {
+  "references": [
+    {
+      "path": "../libs"
+    }
+  ],
   "compilerOptions": {
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "lib": ["ES2022"],
+    "lib": [
+      "ES2022"
+    ],
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
@@ -31,9 +38,13 @@
     "sourceMap": true,
     "stripInternal": true,
     "noEmit": false,
-    "erasableSyntaxOnly": true
+    "erasableSyntaxOnly": true,
+    "composite": true,
+    "incremental": true
   },
-  "include": ["src/**/*"],
+  "include": [
+    "src/**/*"
+  ],
   "ts-node": {
     "compilerOptions": {
       "module": "NodeNext",

@@ -1,0 +1,8 @@
+{
+  "name": "oa-simulator",
+  "workspaces": [
+    "libs",
+    "testing_client",
+    "editor_client"
+  ]
+}

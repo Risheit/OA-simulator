@@ -3,9 +3,11 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "lib": ["ES2022"],
+    "lib": [
+      "ES2022"
+    ],
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "./scripts",
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -33,7 +35,9 @@
     "noEmit": false,
     "erasableSyntaxOnly": true
   },
-  "include": ["src/**/*"],
+  "include": [
+    "scripts/**/*"
+  ],
   "ts-node": {
     "compilerOptions": {
       "module": "NodeNext",
