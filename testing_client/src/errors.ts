@@ -27,7 +27,7 @@ export function ok<T>(val?: T): Result<T | void> {
   return { ok: true, val };
 }
 
-export function fail(msg: string): Result<unknown> {
+export function fail<T>(msg: string): Result<T> {
   return { ok: false, err: msg };
 }
 

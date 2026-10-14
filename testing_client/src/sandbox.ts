@@ -7,19 +7,18 @@ import {
   readdir,
 } from "node:fs/promises";
 import { dirname, isAbsolute, join, relative, resolve } from "node:path";
-import { ok, Result } from "./errors.js";
-import { fail } from "node:assert";
+import { fail, ok, Result } from "./errors.js";
 import { existsSync } from "node:fs";
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
+import { ZipArchive } from "archiver";
 
-const failFileNotFound = () => fail("File not found");
-const failInvalidAccess = () => fail("Accessing files outside of sandbox");
+export function createSandboxArchive(sandboxPath: string): ZipArchive {
+  const archive = new ZipArchive({ zlib: { level: 9 } });
 
-function isOutsideSandbox(sandboxPath: string, path: string) {
-  const relativePath = relative(sandboxPath, path);
+  archive.directory(sandboxPath, "");
 
-  return relativePath.startsWith("..") || isAbsolute(relativePath);
+  return archive;
 }
 
 export async function resetSandbox(sandboxPath: string) {
@@ -131,3 +130,13 @@ export async function execSandboxCommand(
   const execAsync = promisify(exec);
   return execAsync(cmd, { timeout: 1000, cwd: sandboxPath, env: {} });
 }
+
+function isOutsideSandbox(sandboxPath: string, path: string) {
+  const relativePath = relative(sandboxPath, path);
+
+  return relativePath.startsWith("..") || isAbsolute(relativePath);
+}
+
+const failFileNotFound = <T>() => fail<T>("File not found");
+const failInvalidAccess = <T>() =>
+  fail<T>("Accessing files outside of sandbox");

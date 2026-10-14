@@ -13,6 +13,7 @@ import {
   resetSandbox,
   rmSandboxFile,
   writeSandboxFile,
+  createSandboxArchive,
 } from "./sandbox.js";
 import {
   assertEnvVariableDefined,
@@ -138,6 +139,16 @@ app.post("/sandbox/cmd", express.json(), async (req, res) => {
 
   const result = await execSandboxCommand(config.sandboxPath, cmd);
   res.status(200).json(result);
+});
+
+app.get("/sandbox/files", async (_, res) => {
+  const archive = createSandboxArchive(config.sandboxPath);
+
+  res.setHeader("Content-Type", "application/zip");
+  res.setHeader("Content-Disposition", 'attachment; filename="sandbox.zip"');
+
+  archive.pipe(res);
+  await archive.finalize();
 });
 
 // Invalid request handler
