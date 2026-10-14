@@ -11,7 +11,7 @@ import { existsSync } from "node:fs";
 import { exec } from "node:child_process";
 import { promisify } from "node:util";
 import { ZipArchive } from "archiver";
-import { fail, ok, Result } from "@oa-simulator/libs";
+import { fail, ok, Result } from "@oa-simulator/libs/errors";
 
 export function createSandboxArchive(sandboxPath: string): ZipArchive {
   const archive = new ZipArchive({ zlib: { level: 9 } });
