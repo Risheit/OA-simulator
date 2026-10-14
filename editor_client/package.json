@@ -1,0 +1,20 @@
+{
+  "name": "editor_client",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.6.1",
+    "eslint": "^10.11.0",
+    "globals": "^17.12.0",
+    "jiti": "^2.7.0",
+    "typescript-eslint": "^8.70.0"
+  },
+  "dependencies": {}
+}

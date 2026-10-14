@@ -10,7 +10,6 @@ services:
       - /home/coder:mode=755,uid=1000,gid=1000
     volumes:
       - ./editor_client/config:/home/coder/.config
-      - ./dist/.local:/home/coder/.local
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/healthz"]
@@ -18,6 +17,9 @@ services:
       timeout: 10s
       retries: 3
       start_period: 60s
+    depends_on:
+      testing-client:
+        condition: service_healthy
 
   testing-client:
     build:
